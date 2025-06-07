@@ -1,0 +1,31 @@
+Geometry Utilities Client Log File
+[17-02-2025 17:58:56] [Info] Entering GeometriesToInternal with GUSDK:0.7.9.0
+[17-02-2025 17:58:56] [Debug] Directory ok for writing model files: C:\Users\Manav Gupta\AppData\Local\Temp\vmm3nqyo.p4u\brep_files
+[17-02-2025 17:58:56] [Error] An unexpected error occurred during parallel translation or was cancelled. System.AggregateException: One or more errors occurred. ---> Autodesk.GeometryPrimitives.Data.ValidateGeometryException: Face must be a triangle.
+   at Autodesk.GeometryUtilities.MeshAPI.Face.Validate(Boolean shouldHaveNormals)
+   at Autodesk.GeometryUtilities.MeshAPI.Mesh.Validate()
+   at Autodesk.GeometryUtilities.MeshAPI.Extensions.WriteTo(Mesh mesh, String ttmeshFile)
+   at Autodesk.GeometryUtilities.Internal.GeometryExchange.ConvertInMemoryGeometry(Context context, List`1 assets)
+   at Autodesk.GeometryUtilities.Internal.GeometryExchange.ConvertGeometryAssets(Context context, List`1 assets, Boolean fileInfoOnly)
+   at Autodesk.GeometryUtilities.Internal.GeometryExchange.<>c__DisplayClass0_1.<ConvertAssets>b__1(AssetBucket bucket)
+   at System.Threading.Tasks.Parallel.<>c__DisplayClass17_0`1.<ForWorker>b__1()
+   at System.Threading.Tasks.Task.InnerInvokeWithArg(Task childTask)
+   at System.Threading.Tasks.Task.<>c__DisplayClass176_0.<ExecuteSelfReplicating>b__0(Object <p0>)
+   --- End of inner exception stack trace ---
+   at System.Threading.Tasks.Task.ThrowIfExceptional(Boolean includeTaskCanceledExceptions)
+   at System.Threading.Tasks.Task.Wait(Int32 millisecondsTimeout, CancellationToken cancellationToken)
+   at System.Threading.Tasks.Parallel.ForWorker[TLocal](Int32 fromInclusive, Int32 toExclusive, ParallelOptions parallelOptions, Action`1 body, Action`2 bodyWithState, Func`4 bodyWithLocal, Func`1 localInit, Action`1 localFinally)
+   at System.Threading.Tasks.Parallel.ForEachWorker[TSource,TLocal](IEnumerable`1 source, ParallelOptions parallelOptions, Action`1 body, Action`2 bodyWithState, Action`3 bodyWithStateAndIndex, Func`4 bodyWithStateAndLocal, Func`5 bodyWithEverything, Func`1 localInit, Action`1 localFinally)
+   at System.Threading.Tasks.Parallel.ForEach[TSource](IEnumerable`1 source, ParallelOptions parallelOptions, Action`1 body)
+   at Autodesk.GeometryUtilities.Internal.GeometryExchange.ConvertAssets(Context context, IEnumerable`1 assets, Boolean fileInfoOnly, Boolean getStylesFromSource)
+---> (Inner Exception #0) Autodesk.GeometryPrimitives.Data.ValidateGeometryException: Face must be a triangle.
+   at Autodesk.GeometryUtilities.MeshAPI.Face.Validate(Boolean shouldHaveNormals)
+   at Autodesk.GeometryUtilities.MeshAPI.Mesh.Validate()
+   at Autodesk.GeometryUtilities.MeshAPI.Extensions.WriteTo(Mesh mesh, String ttmeshFile)
+   at Autodesk.GeometryUtilities.Internal.GeometryExchange.ConvertInMemoryGeometry(Context context, List`1 assets)
+   at Autodesk.GeometryUtilities.Internal.GeometryExchange.ConvertGeometryAssets(Context context, List`1 assets, Boolean fileInfoOnly)
+   at Autodesk.GeometryUtilities.Internal.GeometryExchange.<>c__DisplayClass0_1.<ConvertAssets>b__1(AssetBucket bucket)
+   at System.Threading.Tasks.Parallel.<>c__DisplayClass17_0`1.<ForWorker>b__1()
+   at System.Threading.Tasks.Task.InnerInvokeWithArg(Task childTask)
+   at System.Threading.Tasks.Task.<>c__DisplayClass176_0.<ExecuteSelfReplicating>b__0(Object <p0>)<---
+

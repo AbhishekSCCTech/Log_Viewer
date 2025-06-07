@@ -1,0 +1,3 @@
+Geometry Utilities Client Log File
+[17-02-2025 17:45:35] [Info] Entering GeometriesToInternal with GUSDK:0.7.9.0
+[17-02-2025 17:45:35] [Debug] Directory ok for writing model files: C:\Users\Manav Gupta\AppData\Local\Temp\o2uticqj.gug\brep_files
