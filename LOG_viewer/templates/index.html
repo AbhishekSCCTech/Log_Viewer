@@ -9,6 +9,13 @@
     </style>
 </head>
 <body>
+
+    <h2>📂 Enter Folder Path to Load Logs</h2>
+    <form method="POST" action="/scan">
+        <input type="text" name="log_folder" placeholder="Enter folder path like D:\Logs\" size="60" required />
+        <button type="submit">Scan Logs</button>
+    </form>
+    
     <h2>All Logs</h2>
     {% for log in logs %}
     <div class="log">

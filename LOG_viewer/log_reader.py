@@ -46,4 +46,21 @@ def get_all_logs():
     conn.close()
     logs = [{'filename': r[0], 'content': r[1], 'timestamp': r[2]} for r in rows]
     return logs
+
+def insert_log(filename, content):
+    conn = sqlite3.connect(DB_FILE)
+    cursor = conn.cursor()
+    
+    # Check for duplicate before inserting
+    cursor.execute("SELECT 1 FROM logs WHERE filename = ?", (filename,))
+    if not cursor.fetchone():
+        timestamp = datetime.now().isoformat()
+        cursor.execute(
+            "INSERT INTO logs (filename, content, timestamp) VALUES (?, ?, ?)",
+            (filename, content, timestamp)
+        )
+        conn.commit()
+    
+    conn.close()
+
     
