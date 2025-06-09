@@ -15,7 +15,23 @@
         <input type="text" name="log_folder" placeholder="Enter folder path like D:\Logs\" size="60" required />
         <button type="submit">Scan Logs</button>
     </form>
-    
+
+    <h2>📂 Filter Logs</h2>
+    <!-- ✅ FILTER FORM -->
+    <form method="get" action="/">
+        <input type="text" name="filename" placeholder="Filename contains..." value="{{ request.args.get('filename', '') }}">
+        <input type="date" name="date" value="{{ request.args.get('date', '') }}">
+        <label for="after">After:</label>
+        <input type="datetime-local" id="after" name="after" value="{{ request.args.get('after', '') }}">
+        <select name="sort">
+            <option value="desc" {% if request.args.get('sort') == 'desc' %}selected{% endif %}>Newest First</option>
+            <option value="asc" {% if request.args.get('sort') == 'asc' %}selected{% endif %}>Oldest First</option>
+        </select>
+        <button type="submit">Apply Filters</button>
+    </form>
+
+    <hr style="border-color: #555;">
+
     <h2>All Logs</h2>
     {% for log in logs %}
     <div class="log">
@@ -23,6 +39,10 @@
         <p><strong>Timestamp:</strong> {{ log.timestamp }}</p>
         <pre>{{ log.content }}</pre>
     </div>
-{% endfor %}
+    {% endfor %}
+  {% else %}
+        <p>No logs found for the given filter.</p>
+  {% endif %}
+  {% endwith %}
 </body>
 </html>

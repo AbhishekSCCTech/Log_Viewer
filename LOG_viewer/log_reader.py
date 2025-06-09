@@ -38,13 +38,32 @@ def store_logs():
     conn.commit()
     conn.close()
 
-def get_all_logs():
+def get_all_logs(after_time_str=None):
     conn = sqlite3.connect(DB_FILE)
     cursor = conn.cursor()
-    cursor.execute("SELECT filename, content, timestamp FROM logs ORDER BY id DESC")
+
+    if after_time_str:
+        try:
+            # Parse the datetime from the URL (HTML returns format: 'YYYY-MM-DDTHH:MM')
+            after_dt = datetime.fromisoformat(after_time_str)
+            cursor.execute(
+                "SELECT filename, content, timestamp FROM logs WHERE timestamp >= ? ORDER BY id DESC",
+                (after_dt.isoformat(),)
+            )
+        except ValueError:
+            cursor.execute("SELECT filename, content, timestamp FROM logs ORDER BY id DESC")
+    else:
+        cursor.execute("SELECT filename, content, timestamp FROM logs ORDER BY id DESC")
+
     rows = cursor.fetchall()
     conn.close()
-    logs = [{'filename': r[0], 'content': r[1], 'timestamp': r[2]} for r in rows]
+
+    logs = [{
+        'filename': r[0],
+        'content': r[1],
+        'timestamp': datetime.fromisoformat(r[2]).strftime('%d-%m-%Y %H:%M:%S')
+    } for r in rows]
+
     return logs
 
 def insert_log(filename, content):
@@ -59,8 +78,8 @@ def insert_log(filename, content):
             "INSERT INTO logs (filename, content, timestamp) VALUES (?, ?, ?)",
             (filename, content, timestamp)
         )
-        conn.commit()
-    
+
+    conn.commit()    
     conn.close()
 
     
