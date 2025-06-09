@@ -10,11 +10,12 @@
 </head>
 <body>
     <h2>All Logs</h2>
-    {% for filename, content in logs %}
+    {% for log in logs %}
     <div class="log">
-        <h4>{{ filename }}</h4>
-        <pre>{{ content }}</pre>
+        <h4>{{ log.filename }}</h4>
+        <p><strong>Timestamp:</strong> {{ log.timestamp }}</p>
+        <pre>{{ log.content }}</pre>
     </div>
-    {% endfor %}
+{% endfor %}
 </body>
 </html>
